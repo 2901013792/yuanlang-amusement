@@ -56,12 +56,12 @@ function Navigation({ currentPage, setCurrentPage, mobileMenuOpen, setMobileMenu
   ]
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-white shadow-lg">
+    <nav className="fixed top-0 left-0 right-0 z-50 bg-gradient-to-b from-black/60 to-transparent">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-20">
           <div className="flex items-center space-x-3">
-            <img src="/logo.jpg" alt="圆郎游乐" className="w-12 h-12 object-contain rounded-xl shadow-lg bg-white" />
-            <h1 className="text-2xl font-bold text-secondary">圆郎游乐</h1>
+            <img src="/logo.jpg" alt="圆郎游乐" className="w-12 h-12 object-contain rounded-xl shadow-lg bg-white/90" />
+            <h1 className="text-2xl font-bold text-white">圆郎游乐</h1>
           </div>
           
           {/* Desktop Nav */}
@@ -72,8 +72,8 @@ function Navigation({ currentPage, setCurrentPage, mobileMenuOpen, setMobileMenu
                 onClick={() => setCurrentPage(link.id)}
                 className={`px-5 py-2.5 rounded-full font-medium transition-all duration-300 ${
                   currentPage === link.id
-                    ? 'bg-primary text-white'
-                    : 'text-gray-700 hover:text-primary hover:bg-gray-100'
+                    ? 'bg-white text-primary'
+                    : 'text-white hover:bg-white/20'
                 }`}
               >
                 {link.label}
