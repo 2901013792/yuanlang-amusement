@@ -8,7 +8,7 @@ function App() {
 
   useEffect(() => {
     const handleScroll = () => {
-      setScrolled(window.scrollY > 50)
+      // 导航栏固定显示，不需要变色
     }
     window.addEventListener('scroll', handleScroll)
     return () => window.removeEventListener('scroll', handleScroll)
@@ -35,7 +35,6 @@ function App() {
       <Navigation 
         currentPage={currentPage} 
         setCurrentPage={setCurrentPage}
-        scrolled={scrolled}
         mobileMenuOpen={mobileMenuOpen}
         setMobileMenuOpen={setMobileMenuOpen}
       />
@@ -683,13 +682,6 @@ function Footer() {
         </div>
       </div>
     </footer>
-  )
-}
-
-// 小组件
-</div>
-      <div className="text-white/80">{label}</div>
-    </div>
   )
 }
 
