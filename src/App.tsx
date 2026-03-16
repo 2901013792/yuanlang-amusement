@@ -3,7 +3,6 @@ import './App.css'
 
 function App() {
   const [currentPage, setCurrentPage] = useState('home')
-  const [scrolled, setScrolled] = useState(false)
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [selectedProduct, setSelectedProduct] = useState<any>(null)
 
@@ -46,7 +45,7 @@ function App() {
   )
 }
 
-function Navigation({ currentPage, setCurrentPage, scrolled, mobileMenuOpen, setMobileMenuOpen }: any) {
+function Navigation({ currentPage, setCurrentPage, mobileMenuOpen, setMobileMenuOpen }: any) {
   const navLinks = [
     { id: 'home', label: '首页' },
     { id: 'about', label: '关于我们' },
@@ -688,10 +687,7 @@ function Footer() {
 }
 
 // 小组件
-function StatItem({ number, label }: { number: string, label: string }) {
-  return (
-    <div className="text-center">
-      <div className="text-4xl md:text-5xl font-bold text-white mb-2">{number}</div>
+</div>
       <div className="text-white/80">{label}</div>
     </div>
   )
