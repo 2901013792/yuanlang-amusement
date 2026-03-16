@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+﻿﻿import { useState, useEffect } from 'react'
 import './App.css'
 
 function App() {
@@ -23,7 +23,9 @@ function App() {
       case 'home': return <HomePage setCurrentPage={setCurrentPage} />
       case 'about': return <AboutPage />
       case 'products': return <ProductsPage setSelectedProduct={setSelectedProduct} />
+      case 'cases': return <CasesPage />
       case 'services': return <ServicesPage />
+      case 'news': return <NewsPage />
       case 'contact': return <ContactPage />
       default: return <HomePage setCurrentPage={setCurrentPage} />
     }
@@ -48,22 +50,20 @@ function Navigation({ currentPage, setCurrentPage, scrolled, mobileMenuOpen, set
   const navLinks = [
     { id: 'home', label: '首页' },
     { id: 'about', label: '关于我们' },
-    { id: 'products', label: '产品中心' },
-    { id: 'services', label: '服务支持' },
-    { id: 'contact', label: '联系方式' },
+    { id: 'products', label: '产品信息' },
+    { id: 'cases', label: '成功案例' },
+    { id: 'services', label: '营销服务' },
+    { id: 'news', label: '新闻中心' },
+    { id: 'contact', label: '联系我们' },
   ]
 
   return (
-    <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-      scrolled ? 'bg-white/95 backdrop-blur-md shadow-lg' : 'bg-transparent'
-    }`}>
+    <nav className="fixed top-0 left-0 right-0 z-50 bg-white shadow-lg">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-20">
           <div className="flex items-center space-x-3">
             <img src="/logo.jpg" alt="圆郎游乐" className="w-12 h-12 object-contain rounded-xl shadow-lg bg-white" />
-            <h1 className={`text-2xl font-bold transition-colors ${
-              scrolled ? 'text-secondary' : 'text-white'
-            }`}>圆郎游乐</h1>
+            <h1 className="text-2xl font-bold text-secondary">圆郎游乐</h1>
           </div>
           
           {/* Desktop Nav */}
@@ -74,10 +74,8 @@ function Navigation({ currentPage, setCurrentPage, scrolled, mobileMenuOpen, set
                 onClick={() => setCurrentPage(link.id)}
                 className={`px-5 py-2.5 rounded-full font-medium transition-all duration-300 ${
                   currentPage === link.id
-                    ? 'bg-white/20 backdrop-blur-sm text-white'
-                    : scrolled 
-                      ? 'text-gray-700 hover:text-primary hover:bg-gray-100'
-                      : 'text-white/90 hover:text-white hover:bg-white/10'
+                    ? 'bg-primary text-white'
+                    : 'text-gray-700 hover:text-primary hover:bg-gray-100'
                 }`}
               >
                 {link.label}
@@ -90,9 +88,9 @@ function Navigation({ currentPage, setCurrentPage, scrolled, mobileMenuOpen, set
             className="md:hidden p-2"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
           >
-            <div className={`w-6 h-0.5 ${scrolled ? 'bg-gray-700' : 'bg-white'} mb-1.5 transition-colors`}></div>
-            <div className={`w-6 h-0.5 ${scrolled ? 'bg-gray-700' : 'bg-white'} mb-1.5 transition-colors`}></div>
-            <div className={`w-6 h-0.5 ${scrolled ? 'bg-gray-700' : 'bg-white'} transition-colors`}></div>
+            <div className="w-6 h-0.5 bg-gray-700 mb-1.5"></div>
+            <div className="w-6 h-0.5 bg-gray-700 mb-1.5"></div>
+            <div className="w-6 h-0.5 bg-gray-700"></div>
           </button>
         </div>
       </div>
@@ -125,65 +123,105 @@ function Navigation({ currentPage, setCurrentPage, scrolled, mobileMenuOpen, set
 }
 
 function HomePage({ setCurrentPage }: { setCurrentPage: (page: string) => void }) {
+  const [currentSlide, setCurrentSlide] = useState(0)
+  
+  const slides = [
+    {
+      image: '/products/1.jpg',
+      title: '创造无限欢乐体验',
+      subtitle: '专业儿童游乐设备制造商',
+      desc: '从设计到安装，提供幼儿园/公园/商场一站式解决方案'
+    },
+    {
+      image: '/products/10.jpg',
+      title: '高端定制服务',
+      subtitle: '按实际场地设计报价',
+      desc: '独一无二的主题乐园，满足您的所有想象'
+    },
+    {
+      image: '/products/20.jpg',
+      title: '安全环保材质',
+      subtitle: '通过国家安全认证',
+      desc: '采用优质黄花梨木，让孩子玩得开心，家长放心'
+    },
+    {
+      image: '/products/5.jpg',
+      title: '1000+ 成功案例',
+      subtitle: '遍布全国 50+ 城市',
+      desc: '服务超过 1000 个幼儿园、公园、商场'
+    }
+  ]
+
+  // 自动轮播
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % slides.length)
+    }, 5000)
+    return () => clearInterval(timer)
+  }, [])
+
   return (
     <div>
-      {/* Hero Section - 改进版 */}
-      <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-        {/* 动态背景 */}
-        <div className="absolute inset-0 hero-gradient"></div>
-        <div className="absolute inset-0 opacity-30">
-          <div className="absolute top-20 left-10 w-72 h-72 bg-white/10 rounded-full blur-3xl animate-pulse"></div>
-          <div className="absolute bottom-20 right-10 w-96 h-96 bg-accent/20 rounded-full blur-3xl animate-pulse delay-1000"></div>
-          <div className="absolute top-1/2 left-1/2 w-64 h-64 bg-primary/20 rounded-full blur-3xl animate-pulse delay-500"></div>
-        </div>
+      {/* Hero Section - 轮播图 */}
+      <section className="relative h-[600px] overflow-hidden">
+        {slides.map((slide, index) => (
+          <div
+            key={index}
+            className={`absolute inset-0 transition-opacity duration-1000 ${
+              index === currentSlide ? 'opacity-100' : 'opacity-0'
+            }`}
+          >
+            <img src={slide.image} alt={slide.title} className="w-full h-full object-cover" />
+            <div className="absolute inset-0 bg-black/40"></div>
+            <div className="absolute inset-0 flex items-center justify-center">
+              <div className="text-center text-white max-w-4xl px-4">
+                <p className="text-lg md:text-xl mb-4 opacity-90">{slide.subtitle}</p>
+                <h1 className="text-5xl md:text-7xl font-bold mb-6">{slide.title}</h1>
+                <p className="text-xl md:text-2xl mb-10 opacity-90">{slide.desc}</p>
+                <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                  <button 
+                    onClick={() => setCurrentPage('products')}
+                    className="bg-primary text-white px-8 py-4 rounded-full font-bold text-lg hover:bg-orange-600 transition-all shadow-lg"
+                  >
+                    探索产品
+                  </button>
+                  <button 
+                    onClick={() => setCurrentPage('contact')}
+                    className="bg-white/20 backdrop-blur-sm text-white border-2 border-white/50 px-8 py-4 rounded-full font-bold text-lg hover:bg-white/30 transition-all"
+                  >
+                    免费咨询
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        ))}
         
-        {/* 内容 */}
-        <div className="relative z-10 max-w-7xl mx-auto px-4 text-center pt-20">
-          <div className="inline-block mb-6 px-6 py-2 bg-white/20 backdrop-blur-sm rounded-full text-white/90 text-sm font-medium">
-            🎡 20 年专业制造 · 全球 50+ 国家信赖
-          </div>
-          <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold text-white mb-8 leading-tight">
-            创造无限
-            <br />
-            <span className="bg-gradient-to-r from-yellow-300 to-orange-300 bg-clip-text text-transparent">
-              欢乐体验
-            </span>
-          </h1>
-          <p className="text-xl md:text-2xl text-white/90 mb-12 max-w-3xl mx-auto leading-relaxed">
-            圆郎游乐 — 专业儿童游乐设备制造商，为孩子创造快乐童年
-            <br />
-            从设计到安装，提供幼儿园/公园/商场一站式解决方案
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <button 
-              onClick={() => setCurrentPage('products')}
-              className="group bg-white text-primary px-8 py-4 rounded-full font-bold text-lg hover:bg-gray-100 transition-all shadow-lg hover:shadow-xl hover:scale-105"
-            >
-              探索产品
-              <span className="inline-block ml-2 group-hover:translate-x-1 transition-transform">→</span>
-            </button>
-            <button 
-              onClick={() => setCurrentPage('contact')}
-              className="bg-white/10 backdrop-blur-sm text-white border-2 border-white/50 px-8 py-4 rounded-full font-bold text-lg hover:bg-white/20 transition-all"
-            >
-              免费咨询
-            </button>
-          </div>
-
-          {/* 统计数据 */}
-          <div className="mt-20 grid grid-cols-2 md:grid-cols-4 gap-8">
-            <StatItem number="10+" label="年行业经验" />
-            <StatItem number="1000+" label="成功案例" />
-            <StatItem number="50+" label="产品系列" />
-            <StatItem number="100%" label="安全认证" />
-          </div>
-        </div>
-
-        {/* 滚动提示 */}
-        <div className="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce">
-          <div className="w-6 h-10 border-2 border-white/50 rounded-full flex justify-center pt-2">
-            <div className="w-1 h-3 bg-white/50 rounded-full"></div>
-          </div>
+        {/* 轮播控制按钮 */}
+        <button
+          onClick={() => setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length)}
+          className="absolute left-4 top-1/2 -translate-y-1/2 bg-white/20 backdrop-blur-sm hover:bg-white/30 text-white p-3 rounded-full transition-all"
+        >
+          <span className="text-2xl">‹</span>
+        </button>
+        <button
+          onClick={() => setCurrentSlide((prev) => (prev + 1) % slides.length)}
+          className="absolute right-4 top-1/2 -translate-y-1/2 bg-white/20 backdrop-blur-sm hover:bg-white/30 text-white p-3 rounded-full transition-all"
+        >
+          <span className="text-2xl">›</span>
+        </button>
+        
+        {/* 轮播指示器 */}
+        <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-3">
+          {slides.map((_, index) => (
+            <button
+              key={index}
+              onClick={() => setCurrentSlide(index)}
+              className={`w-3 h-3 rounded-full transition-all ${
+                index === currentSlide ? 'bg-white w-8' : 'bg-white/50'
+              }`}
+            />
+          ))}
         </div>
       </section>
 
@@ -561,7 +599,7 @@ function ContactPage() {
               <ContactInfoCard
                 icon="📍"
                 title="公司地址"
-                content="中国·广东省·广州市·番禺区"
+                content="浙江省温州市永嘉县桥下镇小京工业区"
                 color="from-blue-500 to-cyan-500"
               />
               <ContactInfoCard
@@ -636,8 +674,8 @@ function Footer() {
             <h4 className="font-bold mb-4">联系我们</h4>
             <ul className="space-y-2 text-white/80">
               <li>📞 400-XXX-XXXX</li>
-              <li>📧 info@yuanlang.com</li>
-              <li>📍 温州永嘉县桥下镇小京工业区</li>
+              <li>📧 info@yuanlang-amusement.com</li>
+              <li>📍 浙江省温州市永嘉县桥下镇小京工业区</li>
             </ul>
           </div>
         </div>
@@ -826,4 +864,90 @@ function ProductDetailPage({ product, onBack }: { product: any, onBack: () => vo
   )
 }
 
+
+function CasesPage() {
+  const cases = [
+    { title: '某市第一幼儿园', location: '浙江省温州市', image: '/products/1.jpg', desc: '大型木制淘气堡组合，面积 300㎡，2024 年 3 月完工', tags: ['幼儿园', '木制系列'] },
+    { title: 'XX 房地产售楼部', location: '江苏省南京市', image: '/products/10.jpg', desc: '高端定制儿童游乐区，提升楼盘品质，2024 年 1 月完工', tags: ['房地产', '非标定制'] },
+    { title: '某国际幼儿园', location: '上海市', image: '/products/20.jpg', desc: '户外拓展攀爬组合，面积 500㎡，2023 年 12 月完工', tags: ['幼儿园', '拓展系列'] },
+    { title: 'XX 商场儿童乐园', location: '浙江省杭州市', image: '/products/5.jpg', desc: '室内海盗船主题乐园，面积 800㎡，2023 年 10 月完工', tags: ['商场', '木制系列'] },
+    { title: '某公园无动力乐园', location: '福建省厦门市', image: '/products/25.jpg', desc: '大型户外无动力游乐设施，面积 2000㎡，2023 年 8 月完工', tags: ['公园', '拓展系列'] },
+    { title: 'XX 度假村亲子乐园', location: '海南省三亚市', image: '/products/30.jpg', desc: '亲子互动游乐设施，面积 1500㎡，2023 年 5 月完工', tags: ['度假村', '配套系列'] },
+  ]
+
+  return (
+    <div className="pt-20">
+      <section className="relative py-24 bg-gradient-to-br from-secondary to-blue-600 text-white">
+        <div className="max-w-7xl mx-auto px-4 text-center">
+          <h1 className="text-5xl md:text-6xl font-bold mb-6">成功案例</h1>
+          <p className="text-xl text-white/90 max-w-3xl mx-auto">1000+ 成功案例，遍布全国 50+ 城市</p>
+        </div>
+      </section>
+      <section className="py-24 bg-gray-50">
+        <div className="max-w-7xl mx-auto px-4">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {cases.map((item, index) => (
+              <div key={index} className="group bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 hover:-translate-y-2">
+                <div className="relative h-56 overflow-hidden">
+                  <img src={item.image} alt={item.title} className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-300" />
+                </div>
+                <div className="p-6">
+                  <div className="flex gap-2 mb-3">
+                    {item.tags.map((tag, i) => (
+                      <span key={i} className="text-xs bg-orange-50 text-primary px-3 py-1 rounded-full font-medium">{tag}</span>
+                    ))}
+                  </div>
+                  <h3 className="text-xl font-bold text-secondary mb-2">{item.title}</h3>
+                  <p className="text-gray-600 text-sm mb-3">{item.desc}</p>
+                  <div className="flex items-center gap-2 text-gray-500 text-sm"><span>📍</span><span>{item.location}</span></div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+    </div>
+  )
+}
+
+function NewsPage() {
+  const news = [
+    { title: '圆郎游乐参加 2024 年广州幼教展', date: '2024-03-15', category: '公司新闻', excerpt: '3 月 15 日，圆郎游乐携最新产品亮相广州国际幼教展，吸引众多客户参观咨询...' },
+    { title: '新产品上市：海盗船系列全新升级', date: '2024-02-20', category: '产品动态', excerpt: '经过 6 个月研发，海盗船系列全新升级，采用更环保的黄花梨木材质...' },
+    { title: '圆郎游乐通过 ISO9001 质量认证', date: '2024-01-10', category: '公司荣誉', excerpt: '近日，圆郎游乐正式通过 ISO9001 质量管理体系认证...' },
+    { title: '行业资讯：2024 年儿童游乐设备市场趋势', date: '2024-01-05', category: '行业资讯', excerpt: '随着消费升级，家长对儿童游乐设备的品质要求越来越高...' },
+  ]
+
+  return (
+    <div className="pt-20">
+      <section className="relative py-24 bg-gradient-to-br from-purple-500 to-pink-600 text-white">
+        <div className="max-w-7xl mx-auto px-4 text-center">
+          <h1 className="text-5xl md:text-6xl font-bold mb-6">新闻中心</h1>
+          <p className="text-xl text-white/90 max-w-3xl mx-auto">了解圆郎游乐最新动态</p>
+        </div>
+      </section>
+      <section className="py-24 bg-gray-50">
+        <div className="max-w-5xl mx-auto px-4">
+          <div className="space-y-6">
+            {news.map((item, index) => (
+              <div key={index} className="bg-white rounded-2xl shadow-lg p-8 hover:shadow-xl transition-shadow cursor-pointer">
+                <div className="flex items-start justify-between gap-4">
+                  <div className="flex-1">
+                    <div className="flex items-center gap-3 mb-3">
+                      <span className="text-sm bg-orange-50 text-primary px-3 py-1 rounded-full font-medium">{item.category}</span>
+                      <span className="text-sm text-gray-500">{item.date}</span>
+                    </div>
+                    <h3 className="text-2xl font-bold text-secondary mb-3">{item.title}</h3>
+                    <p className="text-gray-600">{item.excerpt}</p>
+                  </div>
+                  <div className="text-primary text-2xl">›</div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+    </div>
+  )
+}
 export default App
