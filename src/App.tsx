@@ -32,10 +32,10 @@ function App() {
       return <ProductDetailPage product={selectedProduct} onBack={() => setSelectedProduct(null)} setImageModalOpen={setImageModalOpen} setSelectedImage={setSelectedImage} />
     }
     switch(currentPage) {
-      case 'home': return <HomePage setCurrentPage={setCurrentPage} setImageModalOpen={setImageModalOpen} setSelectedImage={setSelectedImage} setSelectedProduct={setSelectedProduct} setSelectedCategory={setSelectedCategory} />
+      case 'home': return <HomePage setCurrentPage={setCurrentPage} setImageModalOpen={setImageModalOpen} setSelectedImage={setSelectedImage} setSelectedCategory={setSelectedCategory} />
       case 'about': return <AboutPage />
-      case 'products': return <ProductsPage setSelectedProduct={setSelectedProduct} selectedCategory={selectedCategory} setSelectedCategory={setSelectedCategory} setImageModalOpen={setImageModalOpen} setSelectedImage={setSelectedImage} />
-      case 'cases': return <CasesPage setImageModalOpen={setImageModalOpen} setSelectedImage={setSelectedImage} />
+      case 'products': return <ProductsPage setSelectedProduct={setSelectedProduct} selectedCategory={selectedCategory} setSelectedCategory={setSelectedCategory} />
+      case 'cases': return <CasesPage />
       case 'services': return <ServicesPage />
       case 'news': return <NewsPage />
       case 'contact': return <ContactPage />
