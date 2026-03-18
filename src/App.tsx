@@ -1,32 +1,45 @@
-﻿﻿import { useState, useEffect } from 'react'
+﻿﻿﻿﻿﻿﻿import { useState, useEffect } from 'react'
 import './App.css'
 
 function App() {
   const [currentPage, setCurrentPage] = useState('home')
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [selectedProduct, setSelectedProduct] = useState<any>(null)
+  const [navVisible, setNavVisible] = useState(true)
+  const [lastScrollY, setLastScrollY] = useState(0)
+  const [selectedCategory, setSelectedCategory] = useState('全部')
+  const [imageModalOpen, setImageModalOpen] = useState(false)
+  const [selectedImage, setSelectedImage] = useState('')
 
   useEffect(() => {
     const handleScroll = () => {
-      // 导航栏固定显示，不需要变色
+      const currentScrollY = window.scrollY
+      if (currentScrollY > lastScrollY && currentScrollY > 100) {
+        // 向下滚动，隐藏导航栏
+        setNavVisible(false)
+      } else {
+        // 向上滚动，显示导航栏
+        setNavVisible(true)
+      }
+      setLastScrollY(currentScrollY)
     }
     window.addEventListener('scroll', handleScroll)
     return () => window.removeEventListener('scroll', handleScroll)
-  }, [])
+  }, [lastScrollY])
 
   const renderPage = () => {
     if (selectedProduct) {
-      return <ProductDetailPage product={selectedProduct} onBack={() => setSelectedProduct(null)} />
+      return <ProductDetailPage product={selectedProduct} onBack={() => setSelectedProduct(null)} setImageModalOpen={setImageModalOpen} setSelectedImage={setSelectedImage} />
     }
     switch(currentPage) {
-      case 'home': return <HomePage setCurrentPage={setCurrentPage} />
+      case 'home': return <HomePage setCurrentPage={setCurrentPage} setImageModalOpen={setImageModalOpen} setSelectedImage={setSelectedImage} setSelectedProduct={setSelectedProduct} setSelectedCategory={setSelectedCategory} />
       case 'about': return <AboutPage />
-      case 'products': return <ProductsPage setSelectedProduct={setSelectedProduct} />
-      case 'cases': return <CasesPage />
+      case 'products': return <ProductsPage setSelectedProduct={setSelectedProduct} selectedCategory={selectedCategory} setSelectedCategory={setSelectedCategory} setImageModalOpen={setImageModalOpen} setSelectedImage={setSelectedImage} />
+      case 'cases': return <CasesPage setImageModalOpen={setImageModalOpen} setSelectedImage={setSelectedImage} />
       case 'services': return <ServicesPage />
       case 'news': return <NewsPage />
       case 'contact': return <ContactPage />
-      default: return <HomePage setCurrentPage={setCurrentPage} />
+      default: return <HomePage setCurrentPage={setCurrentPage} setImageModalOpen={setImageModalOpen} setSelectedImage={setSelectedImage} />
     }
   }
 
@@ -37,14 +50,57 @@ function App() {
         setCurrentPage={setCurrentPage}
         mobileMenuOpen={mobileMenuOpen}
         setMobileMenuOpen={setMobileMenuOpen}
+        visible={navVisible}
       />
       {renderPage()}
-      <Footer />
+      <Footer setCurrentPage={setCurrentPage} setSelectedCategory={setSelectedCategory} />
+      
+      {/* 图片放大 Modal */}
+      {imageModalOpen && (
+        <div 
+          className="fixed inset-0 z-[100] bg-black/90 flex items-center justify-center p-4"
+          onClick={() => setImageModalOpen(false)}
+        >
+          <button 
+            className="absolute top-6 right-6 text-white text-4xl hover:text-gray-300 transition-colors"
+            onClick={() => setImageModalOpen(false)}
+          >
+            ×
+          </button>
+          <button 
+            className="absolute left-6 top-1/2 -translate-y-1/2 text-white text-4xl hover:text-gray-300 transition-colors"
+            onClick={(e) => {
+              e.stopPropagation()
+              // 可以在这里添加上一张图片的逻辑
+            }}
+          >
+            ‹
+          </button>
+          <button 
+            className="absolute right-6 top-1/2 -translate-y-1/2 text-white text-4xl hover:text-gray-300 transition-colors"
+            onClick={(e) => {
+              e.stopPropagation()
+              // 可以在这里添加下一张图片的逻辑
+            }}
+          >
+            ›
+          </button>
+          <img 
+            src={selectedImage} 
+            alt="放大查看" 
+            className="max-w-full max-h-[90vh] object-contain"
+            onClick={(e) => e.stopPropagation()}
+          />
+          <p className="absolute bottom-6 text-white/80 text-sm">
+            点击任意处关闭 ×
+          </p>
+        </div>
+      )}
     </div>
   )
 }
 
-function Navigation({ currentPage, setCurrentPage, mobileMenuOpen, setMobileMenuOpen }: any) {
+function Navigation({ currentPage, setCurrentPage, mobileMenuOpen, setMobileMenuOpen, visible }: any) {
   const navLinks = [
     { id: 'home', label: '首页' },
     { id: 'about', label: '关于我们' },
@@ -56,7 +112,9 @@ function Navigation({ currentPage, setCurrentPage, mobileMenuOpen, setMobileMenu
   ]
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-gradient-to-b from-black/60 to-transparent">
+    <nav className={`fixed top-0 left-0 right-0 z-50 bg-gradient-to-b from-black/60 to-transparent transition-transform duration-300 ${
+      visible ? 'translate-y-0' : '-translate-y-full'
+    }`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-20">
           <div className="flex items-center space-x-3">
@@ -120,7 +178,7 @@ function Navigation({ currentPage, setCurrentPage, mobileMenuOpen, setMobileMenu
   )
 }
 
-function HomePage({ setCurrentPage }: { setCurrentPage: (page: string) => void }) {
+function HomePage({ setCurrentPage, setImageModalOpen, setSelectedImage, setSelectedProduct, setSelectedCategory }: { setCurrentPage: (page: string) => void, setImageModalOpen?: (open: boolean) => void, setSelectedImage?: (src: string) => void, setSelectedProduct?: (product: any) => void, setSelectedCategory?: (category: string) => void }) {
   const [currentSlide, setCurrentSlide] = useState(0)
   
   const slides = [
@@ -169,7 +227,17 @@ function HomePage({ setCurrentPage }: { setCurrentPage: (page: string) => void }
               index === currentSlide ? 'opacity-100' : 'opacity-0'
             }`}
           >
-            <img src={slide.image} alt={slide.title} className="w-full h-full object-cover" />
+            <img 
+              src={slide.image} 
+              alt={slide.title} 
+              className="w-full h-full object-cover cursor-zoom-in hover:opacity-90 transition-opacity"
+              onClick={() => {
+                if (setImageModalOpen && setSelectedImage) {
+                  setSelectedImage(slide.image)
+                  setImageModalOpen(true)
+                }
+              }}
+            />
             <div className="absolute inset-0 bg-black/40"></div>
             <div className="absolute inset-0 flex items-center justify-center">
               <div className="text-center text-white max-w-4xl px-4">
@@ -267,6 +335,20 @@ function HomePage({ setCurrentPage }: { setCurrentPage: (page: string) => void }
               description="动物篇/海盗船/奇艺篇，黄花梨木材质，安全环保"
               tags={['主打系列', '定制']}
               isImage={true}
+              category="木制系列"
+              onClickImage={(img: string) => {
+                if (setImageModalOpen && setSelectedImage) {
+                  setSelectedImage(img)
+                  setImageModalOpen(true)
+                }
+              }}
+              onCardClick={() => {
+                if (setSelectedCategory && setCurrentPage) {
+                  setSelectedCategory("木制系列")
+                  setCurrentPage("products")
+                  window.scrollTo(0, 0)
+                }
+              }}
             />
             <ProductCard
               name="非标定制"
@@ -274,6 +356,20 @@ function HomePage({ setCurrentPage }: { setCurrentPage: (page: string) => void }
               description="按实际场地设计报价，独一无二主题乐园"
               tags={['高端定制', '爆款']}
               isImage={true}
+              category="非标系列"
+              onClickImage={(img: string) => {
+                if (setImageModalOpen && setSelectedImage) {
+                  setSelectedImage(img)
+                  setImageModalOpen(true)
+                }
+              }}
+              onCardClick={() => {
+                if (setSelectedCategory && setCurrentPage) {
+                  setSelectedCategory("非标系列")
+                  setCurrentPage("products")
+                  window.scrollTo(0, 0)
+                }
+              }}
             />
             <ProductCard
               name="拓展系列"
@@ -281,6 +377,20 @@ function HomePage({ setCurrentPage }: { setCurrentPage: (page: string) => void }
               description="攀爬/爬网/钻网/廊架，体能训练好帮手"
               tags={['学校', '公园']}
               isImage={true}
+              category="拓展系列"
+              onClickImage={(img: string) => {
+                if (setImageModalOpen && setSelectedImage) {
+                  setSelectedImage(img)
+                  setImageModalOpen(true)
+                }
+              }}
+              onCardClick={() => {
+                if (setSelectedCategory && setCurrentPage) {
+                  setSelectedCategory("拓展系列")
+                  setCurrentPage("products")
+                  window.scrollTo(0, 0)
+                }
+              }}
             />
           </div>
           <div className="text-center mt-12">
@@ -380,8 +490,10 @@ function AboutPage() {
   )
 }
 
-function ProductsPage({ setSelectedProduct }: { setSelectedProduct: (product: any) => void }) {
-  const [selectedCategory, setSelectedCategory] = useState('全部')
+function ProductsPage({ setSelectedProduct, selectedCategory, setSelectedCategory, setImageModalOpen, setSelectedImage }: { setSelectedProduct: (product: any) => void, selectedCategory: string, setSelectedCategory: (category: string) => void, setImageModalOpen?: (open: boolean) => void, setSelectedImage?: (src: string) => void }) {
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [selectedCategory])
   
   const products = [
     { name: '木制系列 - 动物篇', icon: '/products/2.jpg', category: '木制系列', desc: '兔子/青蛙/猫头鹰主题，黄花梨木材质，25-69 万', hot: true, isImage: true, price: '25-69 万', material: '黄花梨木', size: '可定制', age: '3-12 岁' },
@@ -472,6 +584,7 @@ function ProductsPage({ setSelectedProduct }: { setSelectedProduct: (product: an
                     onClick={(e) => {
                       e.stopPropagation()
                       setSelectedProduct(product)
+                      window.scrollTo(0, 0)
                     }}
                     className="text-primary font-semibold hover:text-orange-600 flex items-center gap-2 group/btn"
                   >
@@ -603,13 +716,13 @@ function ContactPage() {
               <ContactInfoCard
                 icon="📞"
                 title="联系电话"
-                content="+86 400-XXX-XXXX"
+                content="13676792779（汪总）"
                 color="from-green-500 to-emerald-500"
               />
               <ContactInfoCard
                 icon="📧"
                 title="电子邮箱"
-                content="info@yuanlang-amusement.com"
+                content="240345062@qq.com"
                 color="from-orange-500 to-red-500"
               />
               <ContactInfoCard
@@ -638,7 +751,7 @@ function ContactPage() {
   )
 }
 
-function Footer() {
+function Footer({ setCurrentPage, setSelectedCategory }: { setCurrentPage: (page: string) => void, setSelectedCategory: (category: string) => void }) {
   return (
     <footer className="bg-secondary text-white py-16">
       <div className="max-w-7xl mx-auto px-4">
@@ -653,26 +766,50 @@ function Footer() {
           <div>
             <h4 className="font-bold mb-4">快速链接</h4>
             <ul className="space-y-2 text-white/80">
-              <li className="hover:text-primary cursor-pointer transition-colors">关于我们</li>
-              <li className="hover:text-primary cursor-pointer transition-colors">产品中心</li>
-              <li className="hover:text-primary cursor-pointer transition-colors">服务支持</li>
-              <li className="hover:text-primary cursor-pointer transition-colors">联系方式</li>
+              <li 
+                onClick={() => { setCurrentPage("about"); setTimeout(() => window.scrollTo(0, 0), 100); }} 
+                className="hover:text-primary cursor-pointer transition-colors"
+              >关于我们</li>
+              <li 
+                onClick={() => { setCurrentPage("products"); setTimeout(() => window.scrollTo(0, 0), 100); }} 
+                className="hover:text-primary cursor-pointer transition-colors"
+              >产品中心</li>
+              <li 
+                onClick={() => { setCurrentPage("services"); setTimeout(() => window.scrollTo(0, 0), 100); }} 
+                className="hover:text-primary cursor-pointer transition-colors"
+              >服务支持</li>
+              <li 
+                onClick={() => { setCurrentPage("contact"); setTimeout(() => window.scrollTo(0, 0), 100); }} 
+                className="hover:text-primary cursor-pointer transition-colors"
+              >联系方式</li>
             </ul>
           </div>
           <div>
             <h4 className="font-bold mb-4">产品分类</h4>
             <ul className="space-y-2 text-white/80">
-              <li className="hover:text-primary cursor-pointer transition-colors">木制系列</li>
-              <li className="hover:text-primary cursor-pointer transition-colors">非标系列</li>
-              <li className="hover:text-primary cursor-pointer transition-colors">水上乐园</li>
-              <li className="hover:text-primary cursor-pointer transition-colors">主题定制</li>
+              <li 
+                onClick={() => { setSelectedCategory("木制系列"); setCurrentPage("products"); setTimeout(() => window.scrollTo(0, 0), 100); }} 
+                className="hover:text-primary cursor-pointer transition-colors"
+              >木制系列</li>
+              <li 
+                onClick={() => { setSelectedCategory("非标系列"); setCurrentPage("products"); setTimeout(() => window.scrollTo(0, 0), 100); }} 
+                className="hover:text-primary cursor-pointer transition-colors"
+              >非标系列</li>
+              <li 
+                onClick={() => { setSelectedCategory("拓展系列"); setCurrentPage("products"); setTimeout(() => window.scrollTo(0, 0), 100); }} 
+                className="hover:text-primary cursor-pointer transition-colors"
+              >拓展系列</li>
+              <li 
+                onClick={() => { setSelectedCategory("配套系列"); setCurrentPage("products"); setTimeout(() => window.scrollTo(0, 0), 100); }} 
+                className="hover:text-primary cursor-pointer transition-colors"
+              >配套系列</li>
             </ul>
           </div>
           <div>
             <h4 className="font-bold mb-4">联系我们</h4>
             <ul className="space-y-2 text-white/80">
-              <li>📞 400-XXX-XXXX</li>
-              <li>📧 info@yuanlang-amusement.com</li>
+              <li>📞 13676792779（汪总）</li>
+              <li>📧 240345062@qq.com</li>
               <li>📍 浙江省温州市永嘉县桥下镇小京工业区</li>
             </ul>
           </div>
@@ -697,12 +834,23 @@ function FeatureCard({ icon, title, description, color }: any) {
   )
 }
 
-function ProductCard({ name, image, description, tags, isImage }: any) {
+function ProductCard({ name, image, description, tags, isImage, onClickImage, category, onCardClick }: any) {
   return (
-    <div className="group bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 hover:-translate-y-2">
+    <div 
+      className="group bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 cursor-pointer"
+      onClick={onCardClick}
+    >
       <div className="h-56 bg-gradient-to-br from-primary to-accent flex items-center justify-center overflow-hidden">
         {isImage ? (
-          <img src={image} alt={name} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300" />
+          <img 
+            src={image} 
+            alt={name} 
+            className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300 cursor-zoom-in"
+            onClick={(e) => {
+              e.stopPropagation()
+              if (onClickImage) onClickImage(image)
+            }}
+          />
         ) : (
           <span className="text-8xl">{image}</span>
         )}
@@ -753,7 +901,11 @@ function ContactInfoCard({ icon, title, content, color }: any) {
   )
 }
 
-function ProductDetailPage({ product, onBack }: { product: any, onBack: () => void }) {
+function ProductDetailPage({ product, onBack, setImageModalOpen, setSelectedImage }: { product: any, onBack: () => void, setImageModalOpen?: (open: boolean) => void, setSelectedImage?: (src: string) => void }) {
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [])
+  
   return (
     <div className="pt-20">
       {/* Hero */}
@@ -776,7 +928,17 @@ function ProductDetailPage({ product, onBack }: { product: any, onBack: () => vo
           <div className="grid lg:grid-cols-2 gap-12">
             {/* 产品图片 */}
             <div className="bg-white rounded-2xl shadow-xl overflow-hidden">
-              <img src={product.icon} alt={product.name} className="w-full h-96 object-cover" />
+              <img 
+                src={product.icon} 
+                alt={product.name} 
+                className="w-full h-96 object-cover cursor-zoom-in hover:opacity-90 transition-opacity"
+                onClick={() => {
+                  if (setImageModalOpen && setSelectedImage) {
+                    setSelectedImage(product.icon)
+                    setImageModalOpen(true)
+                  }
+                }}
+              />
             </div>
 
             {/* 产品信息 */}
@@ -812,12 +974,12 @@ function ProductDetailPage({ product, onBack }: { product: any, onBack: () => vo
                 </div>
 
                 <div className="mt-8 space-y-4">
-                  <button className="w-full bg-gradient-to-r from-primary to-accent text-white py-4 rounded-xl font-bold text-lg hover:shadow-lg transition-all">
-                    立即咨询
-                  </button>
-                  <button className="w-full bg-white border-2 border-primary text-primary py-4 rounded-xl font-bold text-lg hover:bg-orange-50 transition-all">
-                    获取报价
-                  </button>
+                  <a href="tel:13676792779" className="block w-full bg-gradient-to-r from-primary to-accent text-white text-center py-4 rounded-xl font-bold text-lg hover:shadow-lg transition-all">
+                    立即咨询 📞
+                  </a>
+                  <a href="tel:13676792779" className="block w-full bg-white border-2 border-primary text-primary text-center py-4 rounded-xl font-bold text-lg hover:bg-orange-50 transition-all">
+                    拨打电话
+                  </a>
                 </div>
               </div>
             </div>
@@ -853,7 +1015,7 @@ function ProductDetailPage({ product, onBack }: { product: any, onBack: () => vo
 }
 
 
-function CasesPage() {
+function CasesPage({ setImageModalOpen, setSelectedImage }: { setImageModalOpen?: (open: boolean) => void, setSelectedImage?: (src: string) => void }) {
   const cases = [
     { title: '某市第一幼儿园', location: '浙江省温州市', image: '/products/1.jpg', desc: '大型木制淘气堡组合，面积 300㎡，2024 年 3 月完工', tags: ['幼儿园', '木制系列'] },
     { title: 'XX 房地产售楼部', location: '江苏省南京市', image: '/products/10.jpg', desc: '高端定制儿童游乐区，提升楼盘品质，2024 年 1 月完工', tags: ['房地产', '非标定制'] },
