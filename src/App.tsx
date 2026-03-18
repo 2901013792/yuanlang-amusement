@@ -178,7 +178,7 @@ function Navigation({ currentPage, setCurrentPage, mobileMenuOpen, setMobileMenu
   )
 }
 
-function HomePage({ setCurrentPage, setImageModalOpen, setSelectedImage, setSelectedProduct, setSelectedCategory }: { setCurrentPage: (page: string) => void, setImageModalOpen?: (open: boolean) => void, setSelectedImage?: (src: string) => void, setSelectedProduct?: (product: any) => void, setSelectedCategory?: (category: string) => void }) {
+function HomePage({ setCurrentPage, setImageModalOpen, setSelectedImage, setSelectedCategory }: { setCurrentPage: (page: string) => void, setImageModalOpen?: (open: boolean) => void, setSelectedImage?: (src: string) => void, setSelectedCategory?: (category: string) => void }) {
   const [currentSlide, setCurrentSlide] = useState(0)
   
   const slides = [
@@ -490,7 +490,7 @@ function AboutPage() {
   )
 }
 
-function ProductsPage({ setSelectedProduct, selectedCategory, setSelectedCategory, setImageModalOpen, setSelectedImage }: { setSelectedProduct: (product: any) => void, selectedCategory: string, setSelectedCategory: (category: string) => void, setImageModalOpen?: (open: boolean) => void, setSelectedImage?: (src: string) => void }) {
+function ProductsPage({ setSelectedProduct, selectedCategory, setSelectedCategory }: { setSelectedProduct: (product: any) => void, selectedCategory: string, setSelectedCategory: (category: string) => void }) {
   useEffect(() => {
     window.scrollTo(0, 0)
   }, [selectedCategory])
@@ -834,7 +834,7 @@ function FeatureCard({ icon, title, description, color }: any) {
   )
 }
 
-function ProductCard({ name, image, description, tags, isImage, onClickImage, category, onCardClick }: any) {
+function ProductCard({ name, image, description, tags, isImage, onClickImage, onCardClick }: any) {
   return (
     <div 
       className="group bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 cursor-pointer"
@@ -1015,7 +1015,7 @@ function ProductDetailPage({ product, onBack, setImageModalOpen, setSelectedImag
 }
 
 
-function CasesPage({ setImageModalOpen, setSelectedImage }: { setImageModalOpen?: (open: boolean) => void, setSelectedImage?: (src: string) => void }) {
+function CasesPage() {
   const cases = [
     { title: '某市第一幼儿园', location: '浙江省温州市', image: '/products/1.jpg', desc: '大型木制淘气堡组合，面积 300㎡，2024 年 3 月完工', tags: ['幼儿园', '木制系列'] },
     { title: 'XX 房地产售楼部', location: '江苏省南京市', image: '/products/10.jpg', desc: '高端定制儿童游乐区，提升楼盘品质，2024 年 1 月完工', tags: ['房地产', '非标定制'] },
