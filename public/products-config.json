@@ -1,0 +1,39 @@
+{
+  "木制系列": [
+    { "name": "木制系列 - 动物篇", "folder": "木制系列/动物篇", "images": ["2022 目录_整页_page6.png", "2022 目录_整页_page7.png", "2022 目录_整页_page8.png"] },
+    { "name": "木制系列 - 奇艺篇", "folder": "木制系列/奇艺篇", "images": ["2022 目录_整页_page13.png", "2022 目录_整页_page14.png", "2022 目录_整页_page24.png", "2022 目录_整页_page25.png", "2022 目录_整页_page27.png", "2022 目录_整页_page28.png", "圆郎目录_page17_img1.jpeg"] },
+    { "name": "木制系列 - 海盗船篇", "folder": "木制系列/海盗船篇", "images": ["2022 目录_整页_page10.png", "2022 目录_整页_page11.png", "2022 目录_整页_page12.png"] },
+    { "name": "木制系列 - 标准篇", "folder": "木制系列/标准篇", "images": ["2022 目录_整页_page15.png", "2022 目录_整页_page16.png", "2022 目录_整页_page17.png", "2022 目录_整页_page18.png", "2022 目录_整页_page19.png", "圆郎目录_page22_img1.jpeg"] },
+    { "name": "木制系列 - 橡果篇", "folder": "木制系列/橡果篇", "images": ["2022 目录_整页_page9.png"] },
+    { "name": "木制系列 - 高塔篇", "folder": "木制系列/高塔篇", "images": ["圆郎目录_page11_img1.jpeg"] },
+    { "name": "木制系列 - PE 板篇", "folder": "木制系列/PE 板篇", "images": ["2022 目录_整页_page20.png"] },
+    { "name": "木制系列 - 塑木篇", "folder": "木制系列/塑木篇", "images": ["圆郎目录_page32_img1.jpeg"] }
+  ],
+  "拓展系列": [
+    { "name": "拓展系列 - 娃娃家篇", "folder": "拓展系列/娃娃家篇", "images": ["2022 目录_整页_page34.png", "2022 目录_整页_page35.png", "圆郎目录_page47_img1.jpeg"] },
+    { "name": "拓展系列 - 攀爬篇", "folder": "拓展系列/攀爬篇", "images": ["2022 目录_整页_page32.png", "圆郎目录_page37_img1.jpeg", "圆郎目录_page38_img1.jpeg"] },
+    { "name": "拓展系列 - 爬网篇", "folder": "拓展系列/爬网篇", "images": ["2022 目录_整页_page36.png", "2022 目录_整页_page37.png", "圆郎目录_page54_img1.jpeg", "圆郎目录_page55_img1.jpeg"] },
+    { "name": "拓展系列 - 钻网篇", "folder": "拓展系列/钻网篇", "images": ["2022 目录_整页_page29.png", "圆郎目录_page33_img1.jpeg", "圆郎目录_page34_img1.jpeg"] },
+    { "name": "拓展系列 - 廊架篇", "folder": "拓展系列/廊架篇", "images": ["2022 目录_整页_page30.png", "圆郎目录_page35_img1.jpeg"] },
+    { "name": "拓展系列 - 魔方篇", "folder": "拓展系列/魔方篇", "images": ["2022 目录_整页_page33.png", "圆郎目录_page39_img1.jpeg", "圆郎目录_page40_img1.jpeg"] },
+    { "name": "拓展系列 - 综合篇", "folder": "拓展系列/综合篇", "images": ["2022 目录_整页_page31.png"] }
+  ],
+  "配套系列": [
+    { "name": "配套系列 - 秋千篇", "folder": "配套系列/秋千篇", "images": ["2022 目录_整页_page40.png", "2022 目录_整页_page41.png", "圆郎目录_page48_img1.jpeg", "圆郎目录_page57_img1.jpeg"] },
+    { "name": "配套系列 - 体能篇", "folder": "配套系列/体能篇", "images": ["2022 目录_整页_page42.png", "2022 目录_整页_page43.png", "2022 目录_整页_page44.png", "圆郎目录_page49_img1.jpeg", "圆郎目录_page50_img1.jpeg", "圆郎目录_page53_img1.jpeg"] },
+    { "name": "配套系列 - 戏水篇", "folder": "配套系列/戏水篇", "images": ["2022 目录_整页_page39.png"] },
+    { "name": "配套系列 - 玩沙篇", "folder": "配套系列/玩沙篇", "images": ["2022 目录_整页_page38.png", "圆郎目录_page52_img1.jpeg"] },
+    { "name": "配套系列 - 健身器材篇", "folder": "配套系列/健身器材篇", "images": ["2022 目录_整页_page47.png", "2022 目录_整页_page49.png"] },
+    { "name": "配套系列 - 乐器篇", "folder": "配套系列/乐器篇", "images": ["2022 目录_整页_page46.png"] },
+    { "name": "配套系列 - 座椅篇", "folder": "配套系列/座椅篇", "images": ["2022 目录_整页_page48.png"] },
+    { "name": "配套系列 - 童车篇", "folder": "配套系列/童车篇", "images": ["2022 目录_整页_page50.png"] },
+    { "name": "配套系列 - 种植篇", "folder": "配套系列/种植篇", "images": ["圆郎目录_page41_img1.jpeg", "圆郎目录_page42_img1.jpeg"] },
+    { "name": "配套系列 - 滑索", "folder": "配套系列/滑索", "images": ["圆郎目录_page43_img1.jpeg", "圆郎目录_page44_img1.jpeg"] },
+    { "name": "配套系列 - 柜子", "folder": "配套系列/柜子", "images": ["圆郎目录_page45_img1.jpeg"] },
+    { "name": "配套系列 - 不锈钢滑梯", "folder": "配套系列/不锈钢滑梯", "images": ["圆郎目录_page59_img1.jpeg", "圆郎目录_page60_img1.jpeg"] },
+    { "name": "配套系列 - PE 摇马篇", "folder": "配套系列/PE 摇马篇", "images": ["2022 目录_整页_page45.png"] }
+  ],
+  "非标系列": [],
+  "项目": [],
+  "证书": []
+}

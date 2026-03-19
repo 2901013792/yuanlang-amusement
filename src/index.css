@@ -10,3 +10,39 @@ body {
 .hero-gradient {
   background: linear-gradient(135deg, #004E89 0%, #FF6B35 100%);
 }
+
+/* 动画定义 */
+@keyframes aurora {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+@keyframes rise {
+  0% {
+    bottom: -10px;
+    opacity: 0;
+    transform: translateX(0) scale(0.5);
+  }
+  10% { opacity: 1; }
+  90% { opacity: 1; }
+  100% {
+    bottom: 100%;
+    opacity: 0;
+    transform: translateX(50px) scale(1.2);
+  }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-20px); }
+}
+
+@keyframes glow {
+  0%, 100% { box-shadow: 0 0 20px rgba(255, 215, 0, 0.5); }
+  50% { box-shadow: 0 0 40px rgba(255, 165, 0, 0.8); }
+}
+
+@keyframes shimmer {
+  0% { background-position: -1000px 0; }
+  100% { background-position: 1000px 0; }
+}

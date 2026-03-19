@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>方案 A 预览 - 渐变 + 粒子效果</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @keyframes aurora {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+        @keyframes rise {
+            0% {
+                bottom: -10px;
+                opacity: 0;
+                transform: translateX(0) scale(0.5);
+            }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% {
+                bottom: 100%;
+                opacity: 0;
+                transform: translateX(50px) scale(1.2);
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+
+    <!-- 方案 A：产品中心（橙色→粉色→紫色） -->
+    <section class="relative py-32 overflow-hidden">
+        <!-- Aurora 渐变背景 -->
+        <div class="absolute inset-0" style="background: linear-gradient(135deg, #F7931A 0%, #FFD23F 50%, #F7931A 100%); background-size: 200% 200%; animation: aurora 12s ease-in-out infinite;"></div>
+        
+        <!-- 粒子效果 -->
+        <div class="absolute inset-0 overflow-hidden">
+            <!-- 生成 50 个粒子 -->
+            <script>
+                for (let i = 0; i < 50; i++) {
+                    const size = Math.random() * 8 + 4;
+                    const left = Math.random() * 100;
+                    const bottom = Math.random() * 100;
+                    const delay = -Math.random() * 15;
+                    const duration = Math.random() * 10 + 10;
+                    document.write(`<div class="absolute rounded-full bg-white/70" style="width: ${size}px; height: ${size}px; left: ${left}%; bottom: ${bottom}%; box-shadow: 0 0 20px rgba(255, 255, 255, 0.5); animation: rise ${duration}s infinite ease-in; animation-delay: ${delay}s;"></div>`);
+                }
+            </script>
+        </div>
+        
+        <!-- 内容 -->
+        <div class="relative z-10 max-w-7xl mx-auto px-4 text-center">
+            <p class="text-lg md:text-xl mb-4 text-white/90 drop-shadow-md">专业儿童游乐设备制造商</p>
+            <h1 class="text-5xl md:text-7xl font-bold mb-6 text-white drop-shadow-lg">产品中心</h1>
+            <p class="text-xl md:text-2xl mb-10 text-white/90 drop-shadow-md">100+ 款游乐设备，满足各种场景需求</p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <button class="bg-gradient-to-r from-[#F7931A] to-[#EA580C] text-white px-8 py-4 rounded-full font-bold text-lg hover:shadow-xl hover:scale-105 transition-all duration-300 shadow-lg">探索产品</button>
+                <button class="bg-white/20 backdrop-blur-sm text-white border-2 border-white/50 px-8 py-4 rounded-full font-bold text-lg hover:bg-white/30 transition-all shadow-lg">免费咨询</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- 方案 A 变体：关于我们（蓝色→青色） -->
+    <section class="relative py-32 overflow-hidden">
+        <div class="absolute inset-0" style="background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 50%, #1e3a8a 100%); background-size: 200% 200%; animation: aurora 12s ease-in-out infinite;"></div>
+        
+        <div class="absolute inset-0 overflow-hidden">
+            <script>
+                for (let i = 0; i < 50; i++) {
+                    const size = Math.random() * 8 + 4;
+                    const left = Math.random() * 100;
+                    const bottom = Math.random() * 100;
+                    const delay = -Math.random() * 15;
+                    const duration = Math.random() * 10 + 10;
+                    document.write(`<div class="absolute rounded-full bg-white/70" style="width: ${size}px; height: ${size}px; left: ${left}%; bottom: ${bottom}%; box-shadow: 0 0 20px rgba(255, 255, 255, 0.5); animation: rise ${duration}s infinite ease-in; animation-delay: ${delay}s;"></div>`);
+                }
+            </script>
+        </div>
+        
+        <div class="relative z-10 max-w-7xl mx-auto px-4 text-center">
+            <p class="text-lg md:text-xl mb-4 text-white/90 drop-shadow-md">10 年专注 · 品质保证</p>
+            <h1 class="text-5xl md:text-7xl font-bold mb-6 text-white drop-shadow-lg">关于圆郎游乐</h1>
+            <p class="text-xl md:text-2xl mb-10 text-white/90 drop-shadow-md">10 年专注儿童游乐设备制造，为孩子创造快乐童年</p>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto">
+                <div class="bg-white/10 backdrop-blur-sm rounded-2xl p-6">
+                    <div class="text-4xl font-bold text-white mb-2">2013</div>
+                    <div class="text-white/80 text-sm">成立年份</div>
+                </div>
+                <div class="bg-white/10 backdrop-blur-sm rounded-2xl p-6">
+                    <div class="text-4xl font-bold text-white mb-2">1000+</div>
+                    <div class="text-white/80 text-sm">成功案例</div>
+                </div>
+                <div class="bg-white/10 backdrop-blur-sm rounded-2xl p-6">
+                    <div class="text-4xl font-bold text-white mb-2">50+</div>
+                    <div class="text-white/80 text-sm">出口国家</div>
+                </div>
+                <div class="bg-white/10 backdrop-blur-sm rounded-2xl p-6">
+                    <div class="text-4xl font-bold text-white mb-2">24h</div>
+                    <div class="text-white/80 text-sm">技术支持</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 方案 A 变体：成功案例（绿色→蓝色） -->
+    <section class="relative py-32 overflow-hidden">
+        <div class="absolute inset-0" style="background: linear-gradient(135deg, #059669 0%, #10b981 50%, #059669 100%); background-size: 200% 200%; animation: aurora 12s ease-in-out infinite;"></div>
+        
+        <div class="absolute inset-0 overflow-hidden">
+            <script>
+                for (let i = 0; i < 50; i++) {
+                    const size = Math.random() * 8 + 4;
+                    const left = Math.random() * 100;
+                    const bottom = Math.random() * 100;
+                    const delay = -Math.random() * 15;
+                    const duration = Math.random() * 10 + 10;
+                    document.write(`<div class="absolute rounded-full bg-white/70" style="width: ${size}px; height: ${size}px; left: ${left}%; bottom: ${bottom}%; box-shadow: 0 0 20px rgba(255, 255, 255, 0.5); animation: rise ${duration}s infinite ease-in; animation-delay: ${delay}s;"></div>`);
+                }
+            </script>
+        </div>
+        
+        <div class="relative z-10 max-w-7xl mx-auto px-4 text-center">
+            <p class="text-lg md:text-xl mb-4 text-white/90 drop-shadow-md">遍布全国 50+ 城市</p>
+            <h1 class="text-5xl md:text-7xl font-bold mb-6 text-white drop-shadow-lg">成功案例</h1>
+            <p class="text-xl md:text-2xl mb-10 text-white/90 drop-shadow-md">1000+ 成功案例，为客户创造价值</p>
+        </div>
+    </section>
+
+    <!-- 方案 A 变体：资质证书（金色→橙色） -->
+    <section class="relative py-32 overflow-hidden">
+        <div class="absolute inset-0" style="background: linear-gradient(135deg, #d97706 0%, #fbbf24 50%, #d97706 100%); background-size: 200% 200%; animation: aurora 12s ease-in-out infinite;"></div>
+        
+        <div class="absolute inset-0 overflow-hidden">
+            <script>
+                for (let i = 0; i < 50; i++) {
+                    const size = Math.random() * 8 + 4;
+                    const left = Math.random() * 100;
+                    const bottom = Math.random() * 100;
+                    const delay = -Math.random() * 15;
+                    const duration = Math.random() * 10 + 10;
+                    document.write(`<div class="absolute rounded-full bg-white/70" style="width: ${size}px; height: ${size}px; left: ${left}%; bottom: ${bottom}%; box-shadow: 0 0 20px rgba(255, 255, 255, 0.5); animation: rise ${duration}s infinite ease-in; animation-delay: ${delay}s;"></div>`);
+                }
+            </script>
+        </div>
+        
+        <div class="relative z-10 max-w-7xl mx-auto px-4 text-center">
+            <p class="text-lg md:text-xl mb-4 text-white/90 drop-shadow-md">专业认证 · 品质保证</p>
+            <h1 class="text-5xl md:text-7xl font-bold mb-6 text-white drop-shadow-lg">资质证书</h1>
+            <p class="text-xl md:text-2xl mb-10 text-white/90 drop-shadow-md">ISO9001、CE、TUV、3C 认证齐全</p>
+        </div>
+    </section>
+
+</body>
+</html>
