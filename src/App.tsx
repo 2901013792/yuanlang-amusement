@@ -1,4 +1,4 @@
-﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿import { useState, useEffect } from 'react'
+﻿﻿﻿import { useState, useEffect } from 'react'
 import './App.css'
 
 function App() {
@@ -210,25 +210,25 @@ function HomePage({ setCurrentPage, setSelectedCategory }: { setCurrentPage: (pa
   
   const slides = [
     {
-      image: '/products/wooden/animal/21.jpg',
+      image: '/products/wooden/animal/21.webp',
       title: '创造无限欢乐体验',
       subtitle: '专业儿童游乐设备制造商',
       desc: '从设计到安装，提供幼儿园/公园/商场一站式解决方案'
     },
     {
-      image: '/products/wooden/unique/25.jpg',
+      image: '/products/wooden/unique/25.webp',
       title: '高端定制服务',
       subtitle: '按实际场地设计报价',
       desc: '独一无二的主题乐园，满足您的所有想象'
     },
     {
-      image: '/products/expansion/climbing/6.jpg',
+      image: '/products/expansion/climbing/6.webp',
       title: '安全环保材质',
       subtitle: '通过国家安全认证',
       desc: '采用优质黄花梨木，让孩子玩得开心，家长放心'
     },
     {
-      image: '/products/wooden/pirate-ship/39.jpg',
+      image: '/products/wooden/pirate-ship/39.webp',
       title: '1000+ 成功案例',
       subtitle: '遍布全国 50+ 城市',
       desc: '服务超过 1000 个幼儿园、公园、商场'
@@ -420,7 +420,7 @@ function HomePage({ setCurrentPage, setSelectedCategory }: { setCurrentPage: (pa
             >
               <div className="h-64 bg-gray-100 overflow-hidden">
                 <img 
-                    src="/products/wooden/animal/21.jpg" 
+                    src="/products/wooden/animal/21.webp" 
                     alt="木制系列" 
                     className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                     loading="lazy"
@@ -443,7 +443,7 @@ function HomePage({ setCurrentPage, setSelectedCategory }: { setCurrentPage: (pa
               className="group bg-white rounded-3xl shadow-2xl overflow-hidden hover:shadow-[0_20px_60px_rgba(255,165,0,0.15)] transition-all duration-500 hover:-translate-y-4 cursor-pointer"
               onClick={() => {
                 if (setSelectedCategory && setCurrentPage) {
-                  setSelectedCategory("木制系列")
+                  setSelectedCategory("非标系列")
                   setCurrentPage("products")
                   window.scrollTo(0, 0)
                 }
@@ -451,7 +451,7 @@ function HomePage({ setCurrentPage, setSelectedCategory }: { setCurrentPage: (pa
             >
               <div className="h-64 bg-gray-100 overflow-hidden">
                 <img 
-                    src="/products/wooden/unique/25.jpg" 
+                    src="/products/wooden/unique/25.webp" 
                     alt="非标定制" 
                     className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                     loading="lazy"
@@ -482,7 +482,7 @@ function HomePage({ setCurrentPage, setSelectedCategory }: { setCurrentPage: (pa
             >
               <div className="h-64 bg-gray-100 overflow-hidden">
                 <img 
-                    src="/products/expansion/climbing/6.jpg" 
+                    src="/products/expansion/climbing/6.webp" 
                     alt="拓展系列" 
                     className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                     loading="lazy"
@@ -766,35 +766,35 @@ function ProductsPage({ setSelectedProduct, selectedCategory, setSelectedCategor
   // 移除自动滚动到顶部的逻辑
   
   const products = [
-    { name: '木制系列 - 橡果篇', category: '木制系列', images: ['/products/wooden/acorn/38.jpg'], desc: '橡果主题，黄花梨木材质，25-69 万', hot: false, price: '25-69 万', material: '黄花梨木', size: '可定制', age: '3-12 岁' },
-    { name: '木制系列 - 动物篇', category: '木制系列', images: ['/products/wooden/animal/21.jpg', '/products/wooden/animal/22.jpg', '/products/wooden/animal/23.jpg'], desc: '兔子/青蛙/猫头鹰主题，黄花梨木材质，25-69 万', hot: true, price: '25-69 万', material: '黄花梨木', size: '可定制', age: '3-12 岁' },
-    { name: '木制系列 - 塑木篇', category: '木制系列', images: ['/products/wooden/composite/24.jpg'], desc: '塑木材质，环保耐用，25-69 万', hot: false, price: '25-69 万', material: '塑木', size: '可定制', age: '3-12 岁' },
-    { name: '木制系列 - PE 板篇', category: '木制系列', images: ['/products/wooden/pe-board/20.jpg'], desc: 'PE 板材质，安全环保，25-69 万', hot: false, price: '25-69 万', material: 'PE 板', size: '可定制', age: '3-12 岁' },
-    { name: '木制系列 - 海盗船篇', category: '木制系列', images: ['/products/wooden/pirate-ship/39.jpg', '/products/wooden/pirate-ship/40.jpg', '/products/wooden/pirate-ship/41.jpg'], desc: '大型海盗船主题，36-125 万，公园爆款', hot: true, price: '36-125 万', material: '黄花梨木', size: '可定制', age: '3-12 岁' },
-    { name: '木制系列 - 标准篇', category: '木制系列', images: ['/products/wooden/standard/32.jpg', '/products/wooden/standard/33.jpg', '/products/wooden/standard/34.jpg', '/products/wooden/standard/35.jpg', '/products/wooden/standard/36.jpg', '/products/wooden/standard/37.jpg'], desc: '标准款式，黄花梨木材质，25-69 万', hot: false, price: '25-69 万', material: '黄花梨木', size: '可定制', age: '3-12 岁' },
-    { name: '木制系列 - 高塔篇', category: '木制系列', images: ['/products/wooden/tower/42.jpg'], desc: '高塔主题，黄花梨木材质，36-125 万', hot: false, price: '36-125 万', material: '黄花梨木', size: '可定制', age: '3-12 岁' },
-    { name: '木制系列 - 奇艺篇', category: '木制系列', images: ['/products/wooden/unique/25.jpg', '/products/wooden/unique/26.jpg', '/products/wooden/unique/27.jpg', '/products/wooden/unique/28.jpg', '/products/wooden/unique/29.jpg', '/products/wooden/unique/30.jpg', '/products/wooden/unique/31.jpg'], desc: '植物大战僵尸/魔法屋主题，42-87 万', hot: true, price: '42-87 万', material: '黄花梨木', size: '可定制', age: '3-12 岁' },
-    { name: '非标系列 - 定制产品', category: '非标系列', images: ['/products/custom/99.jpg', '/products/custom/100.jpg', '/products/custom/102.jpg', '/products/custom/103.jpg', '/products/custom/104.jpg', '/products/custom/105.jpg', '/products/custom/106.jpg', '/products/custom/107.jpg', '/products/custom/108.jpg', '/products/custom/109.jpg', '/products/custom/110.jpg', '/products/custom/111.jpg', '/products/custom/112.jpg', '/products/custom/113.jpg', '/products/custom/114.jpg', '/products/custom/115.jpg', '/products/custom/116.jpg'], desc: '按实际场地设计报价，独一无二', hot: true, price: '面议', material: '定制', size: '定制', age: '全年龄段' },
-    { name: '拓展系列 - 攀爬篇', category: '拓展系列', images: ['/products/expansion/climbing/6.jpg', '/products/expansion/climbing/7.jpg', '/products/expansion/climbing/8.jpg'], desc: '攀岩墙/攀爬架，3.68 万起', hot: false, price: '3.68 万起', material: '镀锌管/绳网', size: '可定制', age: '6-15 岁' },
-    { name: '拓展系列 - 综合篇', category: '拓展系列', images: ['/products/expansion/comprehensive/13.jpg'], desc: '综合拓展设备，3.68 万起', hot: false, price: '3.68 万起', material: '镀锌管/绳网', size: '可定制', age: '6-15 岁' },
-    { name: '拓展系列 - 娃娃家篇', category: '拓展系列', images: ['/products/expansion/dollhouse/1.jpg', '/products/expansion/dollhouse/2.jpg', '/products/expansion/dollhouse/3.jpg'], desc: '娃娃家主题，3.68 万起', hot: false, price: '3.68 万起', material: '镀锌管/绳网', size: '可定制', age: '3-12 岁' },
-    { name: '拓展系列 - 钻网篇', category: '拓展系列', images: ['/products/expansion/drilling-net/14.jpg', '/products/expansion/drilling-net/15.jpg', '/products/expansion/drilling-net/16.jpg'], desc: '钻网主题，3.68 万起', hot: false, price: '3.68 万起', material: '镀锌管/绳网', size: '可定制', age: '6-15 岁' },
-    { name: '拓展系列 - 魔方篇', category: '拓展系列', images: ['/products/expansion/magic-cube/17.jpg', '/products/expansion/magic-cube/18.jpg', '/products/expansion/magic-cube/19.jpg'], desc: '魔方主题，3.68 万起', hot: false, price: '3.68 万起', material: '镀锌管/绳网', size: '可定制', age: '6-15 岁' },
-    { name: '拓展系列 - 爬网篇', category: '拓展系列', images: ['/products/expansion/net-climbing/10.jpg', '/products/expansion/net-climbing/11.jpg', '/products/expansion/net-climbing/12.jpg', '/products/expansion/net-climbing/9.jpg'], desc: '绳网攀爬/钻网，适合公园学校', hot: false, price: '面议', material: '绳网', size: '可定制', age: '6-15 岁' },
-    { name: '拓展系列 - 廊架篇', category: '拓展系列', images: ['/products/expansion/pergola/4.jpg', '/products/expansion/pergola/5.jpg'], desc: '廊架主题，3.68 万起', hot: false, price: '3.68 万起', material: '镀锌管/绳网', size: '可定制', age: '6-15 岁' },
-    { name: '配套系列 - 柜子', category: '配套系列', images: ['/products/accessories/cabinets/87.jpg'], desc: '储物柜，1-5 万', hot: false, price: '1-5 万', material: '黄花梨木', size: '可定制', age: '全年龄段' },
-    { name: '配套系列 - 体能篇', category: '配套系列', images: ['/products/accessories/fitness/77.jpg', '/products/accessories/fitness/78.jpg', '/products/accessories/fitness/79.jpg', '/products/accessories/fitness/80.jpg', '/products/accessories/fitness/81.jpg', '/products/accessories/fitness/82.jpg'], desc: '平衡木/攀爬架/钻洞，黄花梨木', hot: false, price: '面议', material: '黄花梨木', size: '可定制', age: '3-12 岁' },
-    { name: '配套系列 - 种植篇', category: '配套系列', images: ['/products/accessories/gardening/96.jpg', '/products/accessories/gardening/97.jpg'], desc: '种植箱，1-5 万', hot: false, price: '1-5 万', material: '黄花梨木', size: '可定制', age: '全年龄段' },
-    { name: '配套系列 - 健身器材篇', category: '配套系列', images: ['/products/accessories/gym-equipment/83.jpg', '/products/accessories/gym-equipment/84.jpg'], desc: '健身器材，1-5 万', hot: false, price: '1-5 万', material: '镀锌管', size: '可定制', age: '全年龄段' },
-    { name: '配套系列 - 乐器篇', category: '配套系列', images: ['/products/accessories/musical-instruments/76.jpg'], desc: '乐器，1-5 万', hot: false, price: '1-5 万', material: '黄花梨木', size: '可定制', age: '3-12 岁' },
-    { name: '配套系列 - PE 摇马篇', category: '配套系列', images: ['/products/accessories/pe-horse/73.jpg'], desc: 'PE 摇马，1-5 万', hot: false, price: '1-5 万', material: 'PE', size: '可定制', age: '3-12 岁' },
-    { name: '配套系列 - 玩沙篇', category: '配套系列', images: ['/products/accessories/sand-play/90.jpg', '/products/accessories/sand-play/91.jpg'], desc: '玩沙设备，1-5 万', hot: false, price: '1-5 万', material: '黄花梨木', size: '可定制', age: '3-12 岁' },
-    { name: '配套系列 - 座椅篇', category: '配套系列', images: ['/products/accessories/seats/85.jpg'], desc: '座椅，1-5 万', hot: false, price: '1-5 万', material: '黄花梨木', size: '可定制', age: '全年龄段' },
-    { name: '配套系列 - 不锈钢滑梯', category: '配套系列', images: ['/products/accessories/stainless-slides/74.jpg', '/products/accessories/stainless-slides/75.jpg'], desc: '不锈钢滑梯，1-5 万', hot: false, price: '1-5 万', material: '304 不锈钢', size: '可定制', age: '3-12 岁' },
-    { name: '配套系列 - 童车篇', category: '配套系列', images: ['/products/accessories/strollers/98.jpg'], desc: '童车，1-5 万', hot: false, price: '1-5 万', material: '黄花梨木', size: '可定制', age: '3-12 岁' },
-    { name: '配套系列 - 秋千篇', category: '配套系列', images: ['/products/accessories/swings/92.jpg', '/products/accessories/swings/93.jpg', '/products/accessories/swings/94.jpg', '/products/accessories/swings/95.jpg'], desc: '多种秋千组合，镀锌管/黄花梨木', hot: false, price: '面议', material: '镀锌管/黄花梨木', size: '可定制', age: '3-12 岁' },
-    { name: '配套系列 - 戏水篇', category: '配套系列', images: ['/products/accessories/water-play/86.jpg'], desc: '304 不锈钢戏水设备', hot: false, price: '面议', material: '304 不锈钢', size: '可定制', age: '全年龄段' },
-    { name: '配套系列 - 滑索', category: '配套系列', images: ['/products/accessories/zipline/88.jpg', '/products/accessories/zipline/89.jpg'], desc: '滑索，1-5 万', hot: false, price: '1-5 万', material: '镀锌管', size: '可定制', age: '6-15 岁' },
+    { name: '木制系列 - 橡果篇', category: '木制系列', images: ['/products/wooden/acorn/38.webp'], desc: '橡果主题，黄花梨木材质，25-69 万', hot: false, price: '25-69 万', material: '黄花梨木', size: '可定制', age: '3-12 岁' },
+    { name: '木制系列 - 动物篇', category: '木制系列', images: ['/products/wooden/animal/21.webp', '/products/wooden/animal/22.webp', '/products/wooden/animal/23.webp'], desc: '兔子/青蛙/猫头鹰主题，黄花梨木材质，25-69 万', hot: true, price: '25-69 万', material: '黄花梨木', size: '可定制', age: '3-12 岁' },
+    { name: '木制系列 - 塑木篇', category: '木制系列', images: ['/products/wooden/composite/24.webp'], desc: '塑木材质，环保耐用，25-69 万', hot: false, price: '25-69 万', material: '塑木', size: '可定制', age: '3-12 岁' },
+    { name: '木制系列 - PE 板篇', category: '木制系列', images: ['/products/wooden/pe-board/20.webp'], desc: 'PE 板材质，安全环保，25-69 万', hot: false, price: '25-69 万', material: 'PE 板', size: '可定制', age: '3-12 岁' },
+    { name: '木制系列 - 海盗船篇', category: '木制系列', images: ['/products/wooden/pirate-ship/39.webp', '/products/wooden/pirate-ship/40.webp', '/products/wooden/pirate-ship/41.webp'], desc: '大型海盗船主题，36-125 万，公园爆款', hot: true, price: '36-125 万', material: '黄花梨木', size: '可定制', age: '3-12 岁' },
+    { name: '木制系列 - 标准篇', category: '木制系列', images: ['/products/wooden/standard/32.webp', '/products/wooden/standard/33.webp', '/products/wooden/standard/34.webp', '/products/wooden/standard/35.webp', '/products/wooden/standard/36.webp', '/products/wooden/standard/37.webp'], desc: '标准款式，黄花梨木材质，25-69 万', hot: false, price: '25-69 万', material: '黄花梨木', size: '可定制', age: '3-12 岁' },
+    { name: '木制系列 - 高塔篇', category: '木制系列', images: ['/products/wooden/tower/42.webp'], desc: '高塔主题，黄花梨木材质，36-125 万', hot: false, price: '36-125 万', material: '黄花梨木', size: '可定制', age: '3-12 岁' },
+    { name: '木制系列 - 奇艺篇', category: '木制系列', images: ['/products/wooden/unique/25.webp', '/products/wooden/unique/26.webp', '/products/wooden/unique/27.webp', '/products/wooden/unique/28.webp', '/products/wooden/unique/29.webp', '/products/wooden/unique/30.webp', '/products/wooden/unique/31.webp'], desc: '植物大战僵尸/魔法屋主题，42-87 万', hot: true, price: '42-87 万', material: '黄花梨木', size: '可定制', age: '3-12 岁' },
+    { name: '非标系列 - 定制产品', category: '非标系列', images: ['/products/custom/99.webp', '/products/custom/100.webp', '/products/custom/102.webp', '/products/custom/103.webp', '/products/custom/104.webp', '/products/custom/105.webp', '/products/custom/106.webp', '/products/custom/107.webp', '/products/custom/108.webp', '/products/custom/109.webp', '/products/custom/110.webp', '/products/custom/111.webp', '/products/custom/112.webp', '/products/custom/113.webp', '/products/custom/114.webp', '/products/custom/115.webp', '/products/custom/116.webp'], desc: '按实际场地设计报价，独一无二', hot: true, price: '面议', material: '定制', size: '定制', age: '全年龄段' },
+    { name: '拓展系列 - 攀爬篇', category: '拓展系列', images: ['/products/expansion/climbing/6.webp', '/products/expansion/climbing/7.webp', '/products/expansion/climbing/8.webp'], desc: '攀岩墙/攀爬架，3.68 万起', hot: false, price: '3.68 万起', material: '镀锌管/绳网', size: '可定制', age: '6-15 岁' },
+    { name: '拓展系列 - 综合篇', category: '拓展系列', images: ['/products/expansion/comprehensive/13.webp'], desc: '综合拓展设备，3.68 万起', hot: false, price: '3.68 万起', material: '镀锌管/绳网', size: '可定制', age: '6-15 岁' },
+    { name: '拓展系列 - 娃娃家篇', category: '拓展系列', images: ['/products/expansion/dollhouse/1.webp', '/products/expansion/dollhouse/2.webp', '/products/expansion/dollhouse/3.webp'], desc: '娃娃家主题，3.68 万起', hot: false, price: '3.68 万起', material: '镀锌管/绳网', size: '可定制', age: '3-12 岁' },
+    { name: '拓展系列 - 钻网篇', category: '拓展系列', images: ['/products/expansion/drilling-net/14.webp', '/products/expansion/drilling-net/15.webp', '/products/expansion/drilling-net/16.webp'], desc: '钻网主题，3.68 万起', hot: false, price: '3.68 万起', material: '镀锌管/绳网', size: '可定制', age: '6-15 岁' },
+    { name: '拓展系列 - 魔方篇', category: '拓展系列', images: ['/products/expansion/magic-cube/17.webp', '/products/expansion/magic-cube/18.webp', '/products/expansion/magic-cube/19.webp'], desc: '魔方主题，3.68 万起', hot: false, price: '3.68 万起', material: '镀锌管/绳网', size: '可定制', age: '6-15 岁' },
+    { name: '拓展系列 - 爬网篇', category: '拓展系列', images: ['/products/expansion/net-climbing/10.webp', '/products/expansion/net-climbing/11.webp', '/products/expansion/net-climbing/12.webp', '/products/expansion/net-climbing/9.webp'], desc: '绳网攀爬/钻网，适合公园学校', hot: false, price: '面议', material: '绳网', size: '可定制', age: '6-15 岁' },
+    { name: '拓展系列 - 廊架篇', category: '拓展系列', images: ['/products/expansion/pergola/4.webp', '/products/expansion/pergola/5.webp'], desc: '廊架主题，3.68 万起', hot: false, price: '3.68 万起', material: '镀锌管/绳网', size: '可定制', age: '6-15 岁' },
+    { name: '配套系列 - 柜子', category: '配套系列', images: ['/products/accessories/cabinets/87.webp'], desc: '储物柜，1-5 万', hot: false, price: '1-5 万', material: '黄花梨木', size: '可定制', age: '全年龄段' },
+    { name: '配套系列 - 体能篇', category: '配套系列', images: ['/products/accessories/fitness/77.webp', '/products/accessories/fitness/78.webp', '/products/accessories/fitness/79.webp', '/products/accessories/fitness/80.webp', '/products/accessories/fitness/81.webp', '/products/accessories/fitness/82.webp'], desc: '平衡木/攀爬架/钻洞，黄花梨木', hot: false, price: '面议', material: '黄花梨木', size: '可定制', age: '3-12 岁' },
+    { name: '配套系列 - 种植篇', category: '配套系列', images: ['/products/accessories/gardening/96.webp', '/products/accessories/gardening/97.webp'], desc: '种植箱，1-5 万', hot: false, price: '1-5 万', material: '黄花梨木', size: '可定制', age: '全年龄段' },
+    { name: '配套系列 - 健身器材篇', category: '配套系列', images: ['/products/accessories/gym-equipment/83.webp', '/products/accessories/gym-equipment/84.webp'], desc: '健身器材，1-5 万', hot: false, price: '1-5 万', material: '镀锌管', size: '可定制', age: '全年龄段' },
+    { name: '配套系列 - 乐器篇', category: '配套系列', images: ['/products/accessories/musical-instruments/76.webp'], desc: '乐器，1-5 万', hot: false, price: '1-5 万', material: '黄花梨木', size: '可定制', age: '3-12 岁' },
+    { name: '配套系列 - PE 摇马篇', category: '配套系列', images: ['/products/accessories/pe-horse/73.webp'], desc: 'PE 摇马，1-5 万', hot: false, price: '1-5 万', material: 'PE', size: '可定制', age: '3-12 岁' },
+    { name: '配套系列 - 玩沙篇', category: '配套系列', images: ['/products/accessories/sand-play/90.webp', '/products/accessories/sand-play/91.webp'], desc: '玩沙设备，1-5 万', hot: false, price: '1-5 万', material: '黄花梨木', size: '可定制', age: '3-12 岁' },
+    { name: '配套系列 - 座椅篇', category: '配套系列', images: ['/products/accessories/seats/85.webp'], desc: '座椅，1-5 万', hot: false, price: '1-5 万', material: '黄花梨木', size: '可定制', age: '全年龄段' },
+    { name: '配套系列 - 不锈钢滑梯', category: '配套系列', images: ['/products/accessories/stainless-slides/74.webp', '/products/accessories/stainless-slides/75.webp'], desc: '不锈钢滑梯，1-5 万', hot: false, price: '1-5 万', material: '304 不锈钢', size: '可定制', age: '3-12 岁' },
+    { name: '配套系列 - 童车篇', category: '配套系列', images: ['/products/accessories/strollers/98.webp'], desc: '童车，1-5 万', hot: false, price: '1-5 万', material: '黄花梨木', size: '可定制', age: '3-12 岁' },
+    { name: '配套系列 - 秋千篇', category: '配套系列', images: ['/products/accessories/swings/92.webp', '/products/accessories/swings/93.webp', '/products/accessories/swings/94.webp', '/products/accessories/swings/95.webp'], desc: '多种秋千组合，镀锌管/黄花梨木', hot: false, price: '面议', material: '镀锌管/黄花梨木', size: '可定制', age: '3-12 岁' },
+    { name: '配套系列 - 戏水篇', category: '配套系列', images: ['/products/accessories/water-play/86.webp'], desc: '304 不锈钢戏水设备', hot: false, price: '面议', material: '304 不锈钢', size: '可定制', age: '全年龄段' },
+    { name: '配套系列 - 滑索', category: '配套系列', images: ['/products/accessories/zipline/88.webp', '/products/accessories/zipline/89.webp'], desc: '滑索，1-5 万', hot: false, price: '1-5 万', material: '镀锌管', size: '可定制', age: '6-15 岁' },
   ]
 
   const categories = ['全部', '木制系列', '非标系列', '拓展系列', '配套系列']
@@ -1491,12 +1491,12 @@ function ProductDetailPage({ product, onBack, openImageModal }: { product: any, 
 
 function CasesPage() {
   const cases = [
-    { title: '某市第一幼儿园', location: '浙江省温州市', image: '/products/wooden/animal/21.jpg', desc: '大型木制淘气堡组合，面积 300㎡，2024 年 3 月完工', tags: ['幼儿园', '木制系列'] },
-    { title: 'XX 房地产售楼部', location: '江苏省南京市', image: '/products/wooden/unique/25.jpg', desc: '高端定制儿童游乐区，提升楼盘品质，2024 年 1 月完工', tags: ['房地产', '非标定制'] },
-    { title: '某国际幼儿园', location: '上海市', image: '/products/expansion/climbing/6.jpg', desc: '户外拓展攀爬组合，面积 500㎡，2023 年 12 月完工', tags: ['幼儿园', '拓展系列'] },
-    { title: 'XX 商场儿童乐园', location: '浙江省杭州市', image: '/products/wooden/pirate-ship/39.jpg', desc: '室内海盗船主题乐园，面积 800㎡，2023 年 10 月完工', tags: ['商场', '木制系列'] },
-    { title: '某公园无动力乐园', location: '福建省厦门市', image: '/products/accessories/swings/92.jpg', desc: '大型户外无动力游乐设施，面积 2000㎡，2023 年 8 月完工', tags: ['公园', '拓展系列'] },
-    { title: 'XX 度假村亲子乐园', location: '海南省三亚市', image: '/products/accessories/water-play/86.jpg', desc: '亲子互动游乐设施，面积 1500㎡，2023 年 5 月完工', tags: ['度假村', '配套系列'] },
+    { title: '某市第一幼儿园', location: '浙江省温州市', image: '/products/wooden/animal/21.webp', desc: '大型木制淘气堡组合，面积 300㎡，2024 年 3 月完工', tags: ['幼儿园', '木制系列'] },
+    { title: 'XX 房地产售楼部', location: '江苏省南京市', image: '/products/wooden/unique/25.webp', desc: '高端定制儿童游乐区，提升楼盘品质，2024 年 1 月完工', tags: ['房地产', '非标定制'] },
+    { title: '某国际幼儿园', location: '上海市', image: '/products/expansion/climbing/6.webp', desc: '户外拓展攀爬组合，面积 500㎡，2023 年 12 月完工', tags: ['幼儿园', '拓展系列'] },
+    { title: 'XX 商场儿童乐园', location: '浙江省杭州市', image: '/products/wooden/pirate-ship/39.webp', desc: '室内海盗船主题乐园，面积 800㎡，2023 年 10 月完工', tags: ['商场', '木制系列'] },
+    { title: '某公园无动力乐园', location: '福建省厦门市', image: '/products/accessories/swings/92.webp', desc: '大型户外无动力游乐设施，面积 2000㎡，2023 年 8 月完工', tags: ['公园', '拓展系列'] },
+    { title: 'XX 度假村亲子乐园', location: '海南省三亚市', image: '/products/accessories/water-play/86.webp', desc: '亲子互动游乐设施，面积 1500㎡，2023 年 5 月完工', tags: ['度假村', '配套系列'] },
   ]
 
   return (
