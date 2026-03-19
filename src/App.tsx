@@ -1,4 +1,4 @@
-﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿import { useState, useEffect } from 'react'
+﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿import { useState, useEffect } from 'react'
 import './App.css'
 
 function App() {
@@ -38,18 +38,17 @@ function App() {
   }
 
   const renderPage = () => {
-    if (selectedProduct) {
-      return <ProductDetailPage product={selectedProduct} onBack={() => {
-        setSelectedProduct(null)
-        setTimeout(() => {
-          window.scrollTo(0, scrollPosition)
-        }, 0)
-      }} openImageModal={openImageModal} />
-    }
     switch(currentPage) {
       case 'home': return <HomePage setCurrentPage={setCurrentPage} setSelectedCategory={setSelectedCategory} />
       case 'about': return <AboutPage />
-      case 'products': return <ProductsPage setSelectedProduct={setSelectedProduct} selectedCategory={selectedCategory} setSelectedCategory={setSelectedCategory} setScrollPosition={setScrollPosition} />
+      case 'products': return selectedProduct ? 
+        <ProductDetailPage product={selectedProduct} onBack={() => {
+          setSelectedProduct(null)
+          setTimeout(() => {
+            window.scrollTo(0, scrollPosition)
+          }, 0)
+        }} openImageModal={openImageModal} /> :
+        <ProductsPage setSelectedProduct={setSelectedProduct} selectedCategory={selectedCategory} setSelectedCategory={setSelectedCategory} setScrollPosition={setScrollPosition} />
       case 'cases': return <CasesPage />
       case 'services': return <ServicesPage />
       case 'news': return <NewsPage />
@@ -421,10 +420,11 @@ function HomePage({ setCurrentPage, setSelectedCategory }: { setCurrentPage: (pa
             >
               <div className="h-64 bg-gray-100 overflow-hidden">
                 <img 
-                  src="/products/wooden/animal/21.jpg" 
-                  alt="木制系列" 
-                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                />
+                    src="/products/wooden/animal/21.jpg" 
+                    alt="木制系列" 
+                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                    loading="lazy"
+                  />
               </div>
               <div className="p-8">
                 <div className="flex gap-2 mb-4">
@@ -451,10 +451,11 @@ function HomePage({ setCurrentPage, setSelectedCategory }: { setCurrentPage: (pa
             >
               <div className="h-64 bg-gray-100 overflow-hidden">
                 <img 
-                  src="/products/wooden/unique/25.jpg" 
-                  alt="非标定制" 
-                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                />
+                    src="/products/wooden/unique/25.jpg" 
+                    alt="非标定制" 
+                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                    loading="lazy"
+                  />
               </div>
               <div className="p-8">
                 <div className="flex gap-2 mb-4">
@@ -481,10 +482,11 @@ function HomePage({ setCurrentPage, setSelectedCategory }: { setCurrentPage: (pa
             >
               <div className="h-64 bg-gray-100 overflow-hidden">
                 <img 
-                  src="/products/expansion/climbing/6.jpg" 
-                  alt="拓展系列" 
-                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                />
+                    src="/products/expansion/climbing/6.jpg" 
+                    alt="拓展系列" 
+                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                    loading="lazy"
+                  />
               </div>
               <div className="p-8">
                 <div className="flex gap-2 mb-4">
@@ -910,6 +912,7 @@ function ProductsPage({ setSelectedProduct, selectedCategory, setSelectedCategor
                     src={product.images[0]} 
                     alt={product.name} 
                     className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500" 
+                    loading="lazy"
                   />
                   {product.hot && (
                     <div className="absolute top-4 right-4 bg-red-500 text-white px-4 py-2 rounded-full text-sm font-bold shadow-lg">
@@ -1354,13 +1357,14 @@ function ProductDetailPage({ product, onBack, openImageModal }: { product: any, 
             <div className="bg-white rounded-2xl shadow-xl overflow-hidden">
               <div className="relative">
                 <img 
-                  src={product.images[currentImageIndex]} 
-                  alt={`${product.name} - 图片 ${currentImageIndex + 1}`} 
-                  className="w-full h-96 object-cover cursor-zoom-in hover:opacity-90 transition-opacity"
-                  onClick={() => {
-                    openImageModal(product.images, currentImageIndex)
-                  }}
-                />
+                    src={product.images[currentImageIndex]} 
+                    alt={`${product.name} - 图片 ${currentImageIndex + 1}`} 
+                    className="w-full h-96 object-cover cursor-zoom-in hover:opacity-90 transition-opacity"
+                    onClick={() => {
+                      openImageModal(product.images, currentImageIndex)
+                    }}
+                    loading="lazy"
+                  />
                 
                 {/* 左右切换按钮 */}
                 {product.images.length > 1 && (
@@ -1403,6 +1407,7 @@ function ProductDetailPage({ product, onBack, openImageModal }: { product: any, 
                         src={image}
                         alt={`缩略图 ${index + 1}`}
                         className="w-full h-full object-cover"
+                        loading="lazy"
                       />
                     </button>
                   ))}
@@ -1582,7 +1587,7 @@ function CasesPage() {
             {cases.map((item, index) => (
               <div key={index} className="group bg-white rounded-3xl shadow-2xl overflow-hidden hover:shadow-[0_20px_60px_rgba(255,165,0,0.15)] transition-all duration-500 hover:-translate-y-4 border-2 border-transparent hover:border-[#FFA500]/30">
                 <div className="relative h-64 overflow-hidden">
-                  <img src={item.image} alt={item.title} className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500" />
+                  <img src={item.image} alt={item.title} className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500" loading="lazy" />
                 </div>
                 <div className="p-8">
                   <div className="flex flex-wrap gap-2 mb-4">
